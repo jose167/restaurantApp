@@ -3,15 +3,63 @@
   flex-wrap: wrap;
 }
 
-@media screen and (min-width: 549px) {
-    #map-container {
-    order: 0;
-    width: 60%;
-  }
-  .filter-options {
-    order: 1;
-    width: 40%;
-  }
- 
-    
+section {
+    width: 100%;
 }
+
+
+@media screen and (min-width: 549px) {
+   
+   
+    #map-container {
+        width: 60%;
+    }
+    
+    .filter-options {
+        width: 40%;
+        padding: 0px;
+    }
+     /*.filter-options h2 {*/
+     /*    text-align: center;*/
+     /*    margin-top: 10px;*/
+         
+     /*}*/
+     .position-center{
+         margin: auto;
+         width: 80%;
+         padding: 90px 0;
+     }
+}
+
+@media screen and (min-width: 649px) {
+
+    #restaurants-list li {
+        text-align: center;
+        max-width: 40%;
+        float: left;
+        max-height: 100%;
+        height: 400px;
+        margin: 5px;
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 749px) {
+    #restaurants-list li {
+        text-align: center;
+        max-width: 25%;
+        float: left;
+        max-height: 100%;
+        margin: 5px;
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 950px) {
+  main, .header__inner, .nav, .content {
+    width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
