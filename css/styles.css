@@ -230,11 +230,7 @@ nav h1 a {
   height: 100%;
   width: 100%;
 }
-.inside #footer {
-  bottom: 0;
-  position: absolute;
-  width: 50%;
-}
+
 #restaurant-name {
   color: #f18200;
   font-family: Arial,sans-serif;
@@ -300,4 +296,11 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+.RestFooter #footer  {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  left: 0;
 }
