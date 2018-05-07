@@ -1,0 +1,116 @@
+#maincontent {  
+ display: flex;
+  flex-wrap: wrap;
+}
+
+section {
+    width: 100%;
+}
+
+/* ====================== first Break point (expand text) ====================== */
+@media screen and (min-width: 549px) {
+
+  
+}
+
+
+/* ====================== second Break point (expand text) ====================== */
+@media screen and (min-width: 649px) {
+
+  .inside header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      order: 0;
+  }
+  
+  table {
+    width: 95%;
+    
+  }
+
+  .inside #map-container {
+    background: blue none repeat scroll 0 0;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 80px;
+    width: 50%;
+    order:2;
+  }
+  
+  .inside #map {
+    background-color: #ccc;
+    height: 100%;
+    width: 100%;
+  }
+  
+  #restaurant-name {
+    margin: 100px 0 20px 10px;
+    font-size: 1.8em;
+    text-align: center;
+  }
+  
+  
+  #restaurant-cuisine {
+      margin-top: 50px;
+  }
+  
+  #restaurant-container {
+    width: 50%;
+    order: 1;
+  }
+  #reviews-container {
+     width: 100%;
+     order: 3;
+  }
+  
+  #reviews-container h2 {
+        margin-left: 20px;
+  }
+  #reviews-list {
+      max-width: 50%;
+     margin-left: 3px;
+  }
+
+  #restaurant-hours td {
+    font-size: 0.8em;
+  }
+   #breadcrumb {
+    padding: 5px 20px;
+    font-size: 0.8em;
+    width: calc(50% - 40px);
+  }
+  
+}
+@media screen and (min-width: 849px) {
+   .inside #map-container {
+     position: static;
+     height: auto;
+     margin-bottom: 50px;
+   }
+   #reviews-list {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+  }
+  
+   #reviews-list li {
+    height: 450px;
+    padding: 20px;
+    float: left;
+    width: 45%;
+  }
+
+}
+
+@media screen and (min-width: 950px) {
+  main{
+    width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+}
