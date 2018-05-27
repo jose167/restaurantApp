@@ -4,6 +4,79 @@ let restaurants,
 var map
 var markers = []
 
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js').then(function(reg) {
+    // console.log('Registration worked!');
+    // // var indexController = this;
+    
+    if (reg.waiting) {
+      console.log(reg.waiting + 'waiting');
+      waitnigForInstall(reg.waiting);
+      return;
+    }
+
+    if (reg.installing) {
+      console.log(reg.installing + 'installing');
+      trackInstalling(reg.installing);
+      return;
+    }
+
+    reg.addEventListener('updatefound', function() {
+      console.log('instaling 2');
+      trackInstalling(reg.installing);
+    });
+  });  
+  // Ensure refresh is only called once.
+  // This works around a bug in "force update on reload".
+  var refreshing;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if (refreshing) return;
+    window.location.reload();
+    refreshing = true;
+  });
+};
+
+trackInstalling = (worker) => {
+   worker.addEventListener('statechange', function() {
+    if (worker.state == 'installed') {
+      waitnigForInstall(worker);
+    }
+  });
+};
+
+waitnigForInstall = (worker) => {
+  const select  = document.querySelector('.toast');
+  
+  const span    = document.createElement('span');
+  span.className = 'toast-content';
+  span.innerHTML    = "New version available";
+  select.append(span);
+  
+  const button1 = document.createElement('button');
+  button1.className = 'unbutton';
+  button1.innerHTML = 'Refresh';
+  select.append(button1);
+  
+  const button2 = document.createElement('button');
+  button2.className = 'unbutton';
+  button2.innerHTML = 'Dismiss';
+  select.append(button2);
+
+  button1.addEventListener('click', refrehFun(worker));
+  button2.addEventListener('click', dismissFun);
+   select.style.opacity = 1;
+   
+   function refrehFun(worker) {
+     console.log("Refresh button click");
+     worker.postMessage({action: 'skipWaiting'});
+   }
+   
+   function dismissFun(){
+     console.log("Dismiss button click");
+   }
+};
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -11,6 +84,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
 });
+
+
+
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -176,3 +252,37 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 }
+
+// trackInstalling = function(worker) {
+//   worker.addEventListener('statechange', function() {
+//     if (worker.state == 'installed') {
+//       updateReady(worker);
+//     }
+//   });
+// };
+
+// updateReady = function(worker) {
+//   var toast = this._toastsView.show("New version available", {
+//     buttons: ['refresh', 'dismiss']
+//   });
+
+//   toast.answer.then(function(answer) {
+//     if (answer != 'refresh') return;
+//     // TODO: tell the service worker to skipWaiting
+//   });
+// };
+
+
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', function() {
+//     navigator.serviceWorker.register('/sw.js').then(function(registration) {
+//       // Registration was successful
+//       console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//     }, function(err) {
+//       // registration failed :(
+//       console.log('ServiceWorker registration failed: ', err);
+//     });
+//   });
+// }
+
+  
